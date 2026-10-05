@@ -18,6 +18,8 @@ interface ProjectCardProps {
 
 export default function ProjectCard({ project }: ProjectCardProps) {
   const IconComp = iconMap[project.iconName] || Radio;
+  const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
+  const logoSrc = project.logo ? `${basePath}${project.logo}` : null;
 
   return (
     <div
@@ -27,10 +29,10 @@ export default function ProjectCard({ project }: ProjectCardProps) {
         {/* Header: Logo, Company & Tag */}
         <div className="flex items-start justify-between gap-4">
           <div className="flex items-center gap-3.5">
-            {project.logo ? (
+            {logoSrc ? (
               <div className="w-14 h-14 rounded-2xl overflow-hidden border border-white/10 shadow-lg shadow-black/40 flex-shrink-0 bg-slate-800">
                 <Image
-                  src={project.logo}
+                  src={logoSrc}
                   alt={`${project.title} logo`}
                   width={56}
                   height={56}
